@@ -3,9 +3,7 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-  var both = ['client', 'server']
-
-  api.use('coffeescript', both);
+  api.use('coffeescript', ['client', 'server']);
   api.use('iron-router', 'client');
   api.use('templating', 'client')
   api.use('jade', 'client');
