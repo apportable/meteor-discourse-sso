@@ -1,0 +1,24 @@
+template(name='discourse_sso')
+  .discourse-sso
+    if user_logged_in
+      if error
+        +discourse_sso_error
+      else
+        +discourse_sso_forum_login
+    else
+      +discourse_sso_user_login
+
+template(name='discourse_sso_error')
+  .discourse-sso__error
+    h1.discourse-sso__error__heading We're sorry
+    p.discourse-sso__error__text We couldn't log you into the forum. Please try again, or contact <a href='mailto:spritebuilder@apportable.com'>spritebuilder@apportable.com</a> for assistance.
+    p.discourse-sso__error__error-message Message: {{error_message}}
+
+template(name='discourse_sso_forum_login')
+  .discourse-sso__forum-login
+    h1.discourse-sso__forum-login__heading Log In
+    p.discourse-sso__forum-login__text Logging you into the forum...
+
+template(name='discourse_sso_user_login')
+  .discourse-sso__user-login
+    +login

@@ -1,7 +1,8 @@
 Router.map ->
   @route 'discourse_sso',
     path: 'forum/login'
-    onBeforeAction: -> @redirect 'login' unless Meteor.loggingIn() || Meteor.user()
-    action: ->
-      Meteor.call 'discourse_sso', @params, (error, result) ->
-        if error then console.log error else @redirect result
+    onBeforeAction: -> Session.set 'discourse_sso_error', null
+    data: ->
+      params:
+        sso: @params.sso
+        sig: @params.sig
