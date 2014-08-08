@@ -3,8 +3,8 @@ Meteor.methods
     check params, Object
 
     user = User.first @userId
-    if !user then return new Meteor.Error # TODO: more verbose error
-    if !Roles.userIsInRoles user, 'pro_beta_tester' then return new Meteor.Error # TODO: more verbose error
+    throw new Meteor.Error(403, 'Not logged in.') unless user
+    throw new Meteor.Error(403, 'Unauthorized.') unless user.is_authorized_to_download_pro()
 
     sso_secret = "FvJ30dkdLb9aFu8Z62srfwbc"
     sso = SingleSignOn.parse params, sso_secret
