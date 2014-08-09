@@ -6,7 +6,7 @@ Meteor.methods
     throw new Meteor.Error(403, 'Not logged in.') unless user
     throw new Meteor.Error(403, 'Unauthorized.') unless user.is_authorized_to_download_pro()
 
-    sso_secret = "FvJ30dkdLb9aFu8Z62srfwbc"
+    sso_secret = process.env.DISCOURSE_SSO_SECRET
     sso = SingleSignOn.parse params, sso_secret
     sso.email = user.email()
     sso.name = user.profile.name if user.profile && user.profile.name
